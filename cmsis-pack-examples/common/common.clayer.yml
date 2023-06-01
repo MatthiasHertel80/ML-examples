@@ -1,4 +1,5 @@
-#  Copyright (c) 2022 Arm Limited. All rights reserved.
+#  SPDX-FileCopyrightText: Copyright 2022-2023 Arm Limited and/or its
+#  affiliates <open-source-office@arm.com>
 #  SPDX-License-Identifier: Apache-2.0
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,26 +14,26 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-# yaml-language-server: $schema=https://raw.githubusercontent.com/Open-CMSIS-Pack/devtools/schemas/projmgr/1.2.0/tools/projmgr/schemas/clayer.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Open-CMSIS-Pack/devtools/schemas/projmgr/1.5.0/tools/projmgr/schemas/clayer.schema.json
 
 layer:
 
-  description: Common files and components for examples based on Arm ML Embedded evaluation kit.
+  description: Common files and platform-agnostic components for examples based on Arm ML Embedded evaluation kit.
+
 
   groups:
-    - group: Retarget
-      files:
-        - file: src/retarget.c
-        - file: src/uart_cmsdk_apb.c
-        - file: include/uart_config.h
-        - file: include/uart_stdout.h
     - group: Common
       files:
         - file: include/BufAttributes.hpp
         - file: include/ethosu_mem_config.h
-    - group: CMSIS Extra
-      files:
-        - file: src/arm_nn_softmax_common_s8.c
+
+  # Workaround 4001: for TensorFlow's pack referring to
+  # CMSIS_DEVICE_ARM_CORTEX_M_XX_HEADER_FILE.
+  # Can be removed once the pack has been fixed.
+  misc:
+    - for-compiler: AC6
+      CPP:
+        - "-include \"RTE_Components.h\""
 
   components:
     - component: ARM::CMSIS:CORE
@@ -42,19 +43,10 @@ layer:
     - component: tensorflow::Data Processing:Math:gemmlowp fixed-point
     - component: tensorflow::Data Processing:Math:kissfft
     - component: tensorflow::Data Processing:Math:ruy
-    - component: ARM::Device:Definition
-    - component: ARM::Device:Startup&Baremetal
-    - component: ARM::Native Driver:Timeout
-    - component: ARM::Native Driver:SysCounter
-    - component: ARM::Native Driver:SysTimer
-    - component: Arm::Machine Learning:NPU Support:Ethos-U Driver&Generic U55
-      for-type:
-        - +AVH-U55
-    - component: Arm::Machine Learning:NPU Support:Ethos-U Driver&Generic U65
-      for-type:
-        - +AVH-U65
-    - component: tensorflow::Machine Learning:TensorFlow:Kernel&Ethos-U
     - component: tensorflow::Machine Learning:TensorFlow:Kernel Utils
+      # Workaround 4001 (see description above)
+      define:
+        - CMSIS_DEVICE_ARM_CORTEX_M_XX_HEADER_FILE=CMSIS_device_header
     - component: tensorflow::Machine Learning:TensorFlow:Testing
     - component: ARM::ML Eval Kit:Common:API
     - component: ARM::ML Eval Kit:Common:Log
