@@ -8,10 +8,7 @@ project:
   #   - pack: ARM::CMSIS
 
   components:
-    - component: CMSIS:CORE                             # short form, vendor selected from available packs
-    #- component: Device:Startup
-    - component: CMSIS:DSP&Source
-    - component: CMSIS:NN Lib
+    - component: CMSIS:CORE # short form, vendor selected from available packs
     - component: tensorflow::Machine Learning:TensorFlow:Kernel&CMSIS-NN
     - component: tensorflow::Machine Learning:TensorFlow:Kernel Utils
     - component: tensorflow::Machine Learning:TensorFlow:Testing
@@ -19,6 +16,8 @@ project:
     - component: tensorflow::Data Processing:Math:gemmlowp fixed-point&tensorflow
     - component: tensorflow::Data Processing:Math:kissfft&tensorflow
     - component: tensorflow::Data Processing:Math:ruy&tensorflow
+    - component: ARM::CMSIS:NN Lib@4.1.0
+    - component: ARM::CMSIS:DSP&Source@1.14.4
 
   groups:
     - group: Documentation
