@@ -1,0 +1,12 @@
+{
+  "name": "ML Ops MDK Codespace",
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "features": {
+  }
+  "customizations": {
+    "extensions": [
+      "ms-python.python",
+      "ms-python.vscode-pylance"
+   ]  
+  }
+}
