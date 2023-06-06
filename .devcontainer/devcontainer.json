@@ -5,5 +5,10 @@
     "ghcr.io/devcontainers/features/python:1": {
        "installJupyterlab": "true"
     }
-  }
+  },
+  "customizations": {
+    "extensions": [
+      "Arm.keil-studio-pack"
+   ]  
+  },
 }
