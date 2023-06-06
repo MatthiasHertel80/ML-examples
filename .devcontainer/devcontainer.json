@@ -2,12 +2,8 @@
   "name": "ML Ops MDK Codespace",
   "image": "mcr.microsoft.com/devcontainers/universal:2",
   "features": {
+    "ghcr.io/devcontainers/features/python:1": {
+       "installJupyterlab": "true"
+    }
   }
-  "customizations": {
-    "extensions": [
-      "ms-python.python",
-      "ms-python.vscode-pylance"
-   ]  
-  },
-  "postCreateCommand": "pip install mlia ethos-u-vela",
 }
