@@ -8,5 +8,6 @@
       "ms-python.python",
       "ms-python.vscode-pylance"
    ]  
-  }
+  },
+  "postCreateCommand": "pip install mlia ethos-u-vela",
 }
