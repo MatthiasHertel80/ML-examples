@@ -4,28 +4,34 @@ solution:
 
   # Arm CMSIS Solution Extension currently (v0.18.0) requires packs to be listed in csolution file 
   packs:
-    - pack: ARM::CMSIS
-    - pack: ARM::CMSIS-NN@4.0.0
+    - pack: ARM::CMSIS@5.9.0
     - pack: ARM::CMSIS-DSP@1.14.4
-    - pack: ARM::V2M_MPS3_SSE_300_BSP
-    - pack: tensorflow::tensorflow-lite-micro
-    - pack: tensorflow::flatbuffers
-    - pack: tensorflow::ruy
-    - pack: tensorflow::kissfft
-    - pack: tensorflow::gemmlowp
-    - pack: ARM::CMSIS-NN@4.1.0
+    - pack: ARM::CMSIS-NN@4.0.0
+    - pack: Arm::ethos-u-core-driver@1.22.8
+    - pack: ARM::ml-embedded-eval-kit-uc-api@22.8.0-Beta
+    - pack: tensorflow::flatbuffers@1.22.8
+    - pack: tensorflow::gemmlowp@1.22.8
+    - pack: tensorflow::kissfft@1.22.8
+    - pack: tensorflow::ruy@1.22.8
+    - pack: tensorflow::tensorflow-lite-micro@1.22.8
+    - pack: ARM::V2M_MPS3_SSE_300_BSP@1.3.0
+    - pack: ARM::V2M_MPS3_SSE_310_BSP@1.0.0
 
   target-types:
-    - type: avh # runs on Arm Virtual Hardware
+    - type: avh-cs300 # runs on Arm Virtual Hardware
       device: ARM::SSE-300-MPS3 # add more hardware targets (don't forget to add the required packs)
+    - type: avh-cs310 # runs on Arm Virtual Hardware
+      device: ARM::SSE-310-MPS3 # add more hardware targets (don't forget to add the required packs)
 
   build-types:
     # defines toolchain options for 'debug' and 'release'
     - type: debug
+      compiler: AC6
       optimize: none
       debug: on
 
     - type: release
+      compiler: AC6
       optimize: balanced
       debug: off
 

@@ -7,18 +7,6 @@ project:
   # packs:
   #   - pack: ARM::CMSIS
 
-  components:
-    - component: CMSIS:CORE # short form, vendor selected from available packs
-    - component: tensorflow::Machine Learning:TensorFlow:Kernel&CMSIS-NN
-    - component: tensorflow::Machine Learning:TensorFlow:Kernel Utils
-    - component: tensorflow::Machine Learning:TensorFlow:Testing
-    - component: tensorflow::Data Exchange:Serialization:flatbuffers&tensorflow
-    - component: tensorflow::Data Processing:Math:gemmlowp fixed-point&tensorflow
-    - component: tensorflow::Data Processing:Math:kissfft&tensorflow
-    - component: tensorflow::Data Processing:Math:ruy&tensorflow
-    - component: ARM::CMSIS:NN Lib@4.1.0
-    - component: ARM::CMSIS:DSP&Source@1.14.4
-
   groups:
     - group: Documentation
       files:
@@ -27,6 +15,36 @@ project:
     - group: Source
       files:
         - file: ./main.cpp
+
+  misc:
+    - for-compiler: AC6
+      CPP:
+        - "-include \"RTE_Components.h\""
+
+  components:
+    - component: ARM::CMSIS:CORE
+    - component: ARM::CMSIS:DSP&Source
+    - component: ARM::CMSIS:NN Lib
+    - component: tensorflow::Data Exchange:Serialization:flatbuffers
+    - component: tensorflow::Data Processing:Math:gemmlowp fixed-point
+    - component: tensorflow::Data Processing:Math:kissfft
+    - component: tensorflow::Data Processing:Math:ruy
+    - component: tensorflow::Machine Learning:TensorFlow:Kernel Utils
+      # Workaround 4001 (see description above)
+      define:
+        - CMSIS_DEVICE_ARM_CORTEX_M_XX_HEADER_FILE=CMSIS_device_header
+    - component: tensorflow::Machine Learning:TensorFlow:Testing
+    - component: ARM::ML Eval Kit:Common:API
+    - component: ARM::ML Eval Kit:Common:Log
+    - component: ARM::ML Eval Kit:Common:Math
+
+  layers:
+    - layer: ./device/corstone/corstone-device.clayer.yml
+      for-type:
+        - +AVH-SSE-300-U55
+        - +AVH-SSE-300-U65
+        - +AVH-SSE-310-U55
+        - +AVH-SSE-310-U65
 
   output:
     - type: elf
