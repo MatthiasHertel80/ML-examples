@@ -7,9 +7,10 @@
     }
   },
   "customizations": {
-    "extensions": [
-      "Arm.keil-studio-pack"
-   ]  
+    "vscode": {
+      "extensions": [
+        "Arm.keil-studio-pack"
+     ]  
   },
   "postCreateCommand": "pip3 install tensorflow, tensorflow-datasets"
 }
