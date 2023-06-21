@@ -22,7 +22,7 @@
 extern "C" {
 #endif // defined(__cplusplus)
 
-#include "log_macros.h"
+//#include "log_macros.h"
 #include "uart_stdout.h"
 
 /* Platform dependent files */
@@ -74,7 +74,7 @@ static void arm_ethosu_npu_irq_init(void)
     /* Enable the IRQ */
     NVIC_EnableIRQ(ethosu_irqnum);
 
-    debug("EthosU IRQ#: %u, Handler: 0x%p\n", ethosu_irqnum, arm_ethosu_npu_irq_handler);
+//    debug("EthosU IRQ#: %u, Handler: 0x%p\n", ethosu_irqnum, arm_ethosu_npu_irq_handler);
 }
 
 /** @brief  Initialises the NPU */
@@ -88,18 +88,18 @@ static int arm_ethosu_npu_init(void)
     /* Initialise Ethos-U device */
     const void* ethosu_base_address = (void*)(ETHOS_U55_APB_BASE_S);
 
-    if (0 != (err = ethosu_init(&ethosu_drv,         /* Ethos-U driver device pointer */
-                                ethosu_base_address, /* Ethos-U NPU's base address. */
-                                get_cache_arena(),   /* Pointer to fast mem area - NULL for U55. */
-                                get_cache_arena_size(), /* Fast mem region size. */
-                                1,                      /* Security enable. */
-                                1)))                    /* Privilege enable. */
-    {
-        printf_err("failed to initialise Ethos-U device\n");
-        return err;
-    }
+    //if (0 != (err = ethosu_init(&ethosu_drv,         /* Ethos-U driver device pointer */
+    //                            ethosu_base_address, /* Ethos-U NPU's base address. */
+    //                            get_cache_arena(),   /* Pointer to fast mem area - NULL for U55. */
+    //                            get_cache_arena_size(), /* Fast mem region size. */
+    //                            1,                      /* Security enable. */
+    //                            1)))                    /* Privilege enable. */
+    //{
+    //      printf_err("failed to initialise Ethos-U device\n");
+    //    return err;
+    //}
 
-    info("Ethos-U device initialised\n");
+   // info("Ethos-U device initialised\n");
 
     /* Get Ethos-U version */
     struct ethosu_driver_version driver_version;
@@ -108,17 +108,17 @@ static int arm_ethosu_npu_init(void)
     ethosu_get_driver_version(&driver_version);
     ethosu_get_hw_info(&ethosu_drv, &hw_info);
 
-    info("Ethos-U version info:\n");
-    info("\tArch:       v%" PRIu32 ".%" PRIu32 ".%" PRIu32 "\n",
-         hw_info.version.arch_major_rev,
-         hw_info.version.arch_minor_rev,
-         hw_info.version.arch_patch_rev);
-    info("\tDriver:     v%" PRIu8 ".%" PRIu8 ".%" PRIu8 "\n",
-         driver_version.major,
-         driver_version.minor,
-         driver_version.patch);
-    info("\tMACs/cc:    %" PRIu32 "\n", (uint32_t)(1 << hw_info.cfg.macs_per_cc));
-    info("\tCmd stream: v%" PRIu32 "\n", hw_info.cfg.cmd_stream_version);
+    //info("Ethos-U version info:\n");
+    //info("\tArch:       v%" PRIu32 ".%" PRIu32 ".%" PRIu32 "\n",
+    //     hw_info.version.arch_major_rev,
+    //     hw_info.version.arch_minor_rev,
+    //     hw_info.version.arch_patch_rev);
+    //info("\tDriver:     v%" PRIu8 ".%" PRIu8 ".%" PRIu8 "\n",
+    //     driver_version.major,
+    //     driver_version.minor,
+    //     driver_version.patch);
+    //info("\tMACs/cc:    %" PRIu32 "\n", (uint32_t)(1 << hw_info.cfg.macs_per_cc));
+    //info("\tCmd stream: v%" PRIu32 "\n", hw_info.cfg.cmd_stream_version);
 
     return 0;
 }

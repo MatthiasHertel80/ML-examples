@@ -33,6 +33,8 @@ default:
         - -Wno-macro-redefined
         - -Wno-pragma-pack
         - -Wno-parentheses-equality
+      CPP:
+        - -std=c++11
       C:
         - -std=gnu11
       ASM:

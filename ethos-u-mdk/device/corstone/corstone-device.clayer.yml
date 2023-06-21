@@ -22,11 +22,6 @@ layer:
 
   groups:
     - group: Retarget
-      for-type:
-        - +AVH-SSE-300-U55
-        - +AVH-SSE-310-U55
-        - +AVH-SSE-300-U65
-        - +AVH-SSE-310-U65
       files:
         - file: src/retarget.c
         - file: src/uart_cmsdk_apb.c
@@ -42,11 +37,4 @@ layer:
     - component: ARM::Native Driver:SysCounter
     - component: ARM::Native Driver:SysTimer
     - component: Arm::Machine Learning:NPU Support:Ethos-U Driver&Generic U55
-      for-type:
-        - +AVH-SSE-300-U55
-        - +AVH-SSE-310-U55
-    - component: Arm::Machine Learning:NPU Support:Ethos-U Driver&Generic U65
-      for-type:
-        - +AVH-SSE-300-U65
-        - +AVH-SSE-310-U65
     - component: tensorflow::Machine Learning:TensorFlow:Kernel&Ethos-U

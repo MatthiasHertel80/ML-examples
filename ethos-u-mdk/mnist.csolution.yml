@@ -1,19 +1,22 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/Open-CMSIS-Pack/devtools/schemas/projmgr/1.5.0/tools/projmgr/schemas/csolution.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Open-CMSIS-Pack/devtools/schemas/projmgr/2.0.0-dev1/tools/projmgr/schemas/csolution.schema.json
 
 solution:
+  created-for: CMSIS-Toolbox@2.0.0
+  cdefault:
+  compiler: AC6                               # currently required for components Compiler:I/O
 
-  # Arm CMSIS Solution Extension currently (v0.18.0) requires packs to be listed in csolution file 
+
+  #  it is recommended to list the pack or packs that define the device or board used in the csolution.yml file 
   packs:
     - pack: ARM::CMSIS@5.9.0
     - pack: ARM::CMSIS-DSP@1.14.4
     - pack: ARM::CMSIS-NN@4.0.0
-    - pack: Arm::ethos-u-core-driver@1.22.8
-    - pack: ARM::ml-embedded-eval-kit-uc-api@22.8.0-Beta
-    - pack: tensorflow::flatbuffers@1.22.8
-    - pack: tensorflow::gemmlowp@1.22.8
-    - pack: tensorflow::kissfft@1.22.8
-    - pack: tensorflow::ruy@1.22.8
-    - pack: tensorflow::tensorflow-lite-micro@1.22.8
+    - pack: Arm::ethos-u-core-driver@1.23.2
+    - pack: tensorflow::flatbuffers@1.23.2
+    - pack: tensorflow::gemmlowp@1.23.2
+    - pack: tensorflow::kissfft@1.23.2
+    - pack: tensorflow::ruy@1.23.2
+    - pack: tensorflow::tensorflow-lite-micro@1.23.2
     - pack: ARM::V2M_MPS3_SSE_300_BSP@1.3.0
     - pack: ARM::V2M_MPS3_SSE_310_BSP@1.0.0
 
@@ -35,12 +38,10 @@ solution:
       optimize: balanced
       debug: off
 
+  output-dirs:
+    outdir: ./out/$TargetType$/
+
   projects:
     # list related projects
     - project: ./mnist-test.cproject.yml
 
-# Separate outout directories
-#  output-dirs:
-#   cprjdir: ./build/$Project$/$Compiler$/$BuildType$+$TargetType$
-#   intdir:  ./build/$Project$/$Compiler$/$BuildType$+$TargetType$/intdir
-#   outdir:  ./build/$Project$/$Compiler$/$BuildType$+$TargetType$/outdir
