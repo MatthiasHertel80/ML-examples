@@ -15,7 +15,7 @@ jobs:
         SECRETS: ${{ toJson(secrets) }}
         GITHUB: ${{ toJson(github) }}
       with:
-        notebook: "${{ github.workspace }}/ethos_u_ksc/train_and_deploy.ipynb"
+        notebook: "${{ github.workspace }}/ethos-u-ksc/train_and_deploy.ipynb"
         isReport: False
         poll: True
     - uses: actions/upload-artifact@v3
