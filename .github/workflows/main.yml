@@ -14,6 +14,7 @@ jobs:
           pip install ethos_u_vela
           pip install tensorflow
           pip install tensorflow_datasets
+          sudo apt-get install -y xxd
     - uses: yaananth/run-notebook@v2
       env:
         RUNNER: ${{ toJson(runner) }}
