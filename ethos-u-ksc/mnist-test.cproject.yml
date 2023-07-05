@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Open-CMSIS-Pack/devtools/schemas/projmgr/1.5.0/tools/projmgr/schemas/cproject.schema.json
+
+project:
+
+  # it's recommended to explicitly list the packs that are used by the solution/project,
+  # otherwise all installed packs are used to discover components
+  # packs:
+  #   - pack: ARM::CMSIS
+
+  groups:
+    - group: Documentation
+      files:
+        - file: ./train_and_deploy.ipynb
+
+    - group: Source
+      files:
+        - file: ./main.cpp
+
+  #misc:
+  #  - for-compiler: AC6
+  #    CPP:
+  #      - "-include \"RTE_Components.h\""
+
+  components:
+    - component: ARM::CMSIS:CORE
+    - component: ARM::CMSIS:DSP&Source
+    - component: ARM::CMSIS:NN Lib
+    - component: tensorflow::Data Exchange:Serialization:flatbuffers
+    - component: tensorflow::Data Processing:Math:gemmlowp fixed-point
+    - component: tensorflow::Data Processing:Math:kissfft
+    - component: tensorflow::Data Processing:Math:ruy
+    - component: tensorflow::Machine Learning:TensorFlow:Kernel Utils
+    - component: tensorflow::Machine Learning:TensorFlow:Testing
+
+  layers:
+    - layer: ./device/corstone/corstone-device.clayer.yml
+      for-context: +avh-cs300
+
