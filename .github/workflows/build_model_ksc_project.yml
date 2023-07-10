@@ -9,8 +9,12 @@ jobs:
     - uses: actions/checkout@v3
     - name: Set up Python
       uses: actions/setup-python@v3
-    - name: set env
-      run: echo "::set-env name=NOW::$(date +'%Y-%m-%dT%H:%M:%S')"
+    - name: Get current time
+      uses: josStorer/get-current-time@v2
+      id: current-time
+      with:
+        format: YYYYMMDD-HH
+        utcOffset: "+08:00"
     - name: Set up ML stacks and tools
       run: |
           pip install ethos_u_vela
@@ -28,7 +32,7 @@ jobs:
       uses: test-room-7/action-update-file@v1
       with:
           file-path: ethos-u-ksc/my_network_model.h
-          commit-msg: Update model ${{ env.NOW }}
+          commit-msg: Update model ${{ steps.current-time.outputs.formattedTime }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
 #    - uses: yaananth/run-notebook@v2
 #      env:
