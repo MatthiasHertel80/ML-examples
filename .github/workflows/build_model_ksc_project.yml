@@ -22,6 +22,12 @@ jobs:
     - name: Output
       run:
           cat ${{ github.workspace }}/ethos-u-ksc/my_network_model.h
+    - name: Update resources
+      uses: test-room-7/action-update-file@v1
+      with:
+          file-path: ${{ github.workspace }}/ethos-u-ksc/my_network_model.h
+          commit-msg: Update model
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 #    - uses: yaananth/run-notebook@v2
 #      env:
 #        RUNNER: ${{ toJson(runner) }}
