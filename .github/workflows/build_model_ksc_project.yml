@@ -19,6 +19,9 @@ jobs:
     - name: Run Notebook to build model
       run: 
           jupyter nbconvert --to notebook --execute ${{ github.workspace }}/ethos-u-ksc/train_and_deploy.ipynb --output notebook_output
+    - name: Output
+      run:
+          cat ${{ github.workspace }}/ethos-u-ksc/my_network_model.h
 #    - uses: yaananth/run-notebook@v2
 #      env:
 #        RUNNER: ${{ toJson(runner) }}
