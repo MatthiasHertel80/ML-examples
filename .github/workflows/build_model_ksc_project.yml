@@ -25,8 +25,8 @@ jobs:
     - name: Update resources
       uses: test-room-7/action-update-file@v1
       with:
-          file-path: ${{ github.workspace }}/ethos-u-ksc/my_network_model.h
-          commit-msg: Update model
+          file-path: ethos-u-ksc/my_network_model.h
+          commit-msg: Update model {{ steps.date.outputs.date }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
 #    - uses: yaananth/run-notebook@v2
 #      env:
