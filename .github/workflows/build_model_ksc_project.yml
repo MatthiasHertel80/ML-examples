@@ -14,20 +14,22 @@ jobs:
           pip install ethos_u_vela
           pip install tensorflow
           pip install tensorflow_datasets
+          pip install jupyter
           sudo apt-get install -y xxd
-    - uses: yaananth/run-notebook@v2
-      env:
-        RUNNER: ${{ toJson(runner) }}
-        SECRETS: ${{ toJson(secrets) }}
-        GITHUB: ${{ toJson(github) }}
-      with:
-        notebook: "${{ github.workspace }}/ethos-u-ksc/train_and_deploy.ipynb"
-        isReport: False
-        poll: True
-    - uses: actions/upload-artifact@v3
-      if: always()
-      with:
-        name: output
-        path: ${{ RUNNER.temp }}/nb-runner
-      env:
-        RUNNER: ${{ toJson(runner) }}
+    - name: Run Notebook to build model
+      run: 
+          jupyter nbconvert --to notebook \
+          --execute ${{ github.workspace }}/ethos-u-ksc/train_and_deploy.ipynb \
+          --output notebook_output
+#    - uses: yaananth/run-notebook@v2
+#      env:
+#        RUNNER: ${{ toJson(runner) }}
+#        SECRETS: ${{ toJson(secrets) }}
+#        GITHUB: ${{ toJson(github) }}
+#      with:
+#        notebook: "${{ github.workspace }}/ethos-u-ksc/train_and_deploy.ipynb"
+#        isReport: False
+#        poll: True
+
+
+
