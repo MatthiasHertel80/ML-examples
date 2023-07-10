@@ -14,13 +14,11 @@ jobs:
           pip install ethos_u_vela
           pip install tensorflow
           pip install tensorflow_datasets
-          pip install jupyter
+          pip install jupyter nbconvert nbformat
           sudo apt-get install -y xxd
     - name: Run Notebook to build model
       run: 
-          jupyter nbconvert --to notebook \
-          --execute ${{ github.workspace }}/ethos-u-ksc/train_and_deploy.ipynb \
-          --output notebook_output
+          jupyter nbconvert --to notebook --execute ${{ github.workspace }}/ethos-u-ksc/train_and_deploy.ipynb --output notebook_output
 #    - uses: yaananth/run-notebook@v2
 #      env:
 #        RUNNER: ${{ toJson(runner) }}
